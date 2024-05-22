@@ -7,7 +7,8 @@ import {
   ImageBackground,
   Dimensions,
   Image,
-  ScrollView
+  ScrollView,
+  Alert
 } from 'react-native';  
 import { MyButton } from '../../components' 
 import { ICFacebook, ICGoogle } from '../../../assets'       
@@ -16,12 +17,29 @@ import React from 'react'
 
 const windowWidth = Dimensions.get('window').width;
 
-export default function LoginScreen(){
+export default function LoginScreen({navigation}){
   const [email, onChangeEmail] = React.useState('')
   const [pasword, onChangePassword] = React.useState('')
 
   const onSubmitLogin =()=>{
-    alert(email)
+    try{
+      if(email.trim().length === 0 ){
+        throw Error('Email is required')
+      }
+
+      if(pasword.trim().length === 0 ){
+        throw Error('Password is required')
+      }
+
+      navigation.navigate('Home')
+    }catch(err){
+      Alert.alert('Error', err.message, [
+        {text: 'OK', onPress: () => {
+          console.log('ERR')
+        }},
+      ]);
+    }
+
   }
 
   return (
@@ -67,6 +85,10 @@ export default function LoginScreen(){
             
         </View>
 
+        <Text style={style.textContinueStyle}>
+          Or continue with
+        </Text>
+
         <View style={style.btnContainer}>
           <MyButton
             text="Google"
@@ -76,6 +98,11 @@ export default function LoginScreen(){
             style={{marginLeft:15}}
             text="Facebook"
             imgUrl={ICFacebook}/>
+        </View>
+
+        <View style={style.containerBottom}>
+          <Text>Don't have account? </Text>
+          <Text style={{fontWeight:'bold'}}>Create now</Text>
         </View>
       </View>
     </ScrollView>
@@ -97,6 +124,7 @@ const style = StyleSheet.create({
     marginTop:150,
     fontWeight:'bold',
     textAlign:'center'
+    
   },
   brandStyle:{
     marginTop:100,
@@ -112,5 +140,15 @@ const style = StyleSheet.create({
     flexDirection:'row',
     paddingLeft:20,
     paddingRight:20
+  },
+  textContinueStyle:{
+    textAlign:'center',
+    padding:10
+  },
+  containerBottom:{
+    flex:1,
+    flexDirection:'row',
+    justifyContent:'center',
+    padding:30
   }
 })
