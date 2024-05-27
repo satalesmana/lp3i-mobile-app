@@ -10,7 +10,7 @@ import {
   ScrollView,
   Alert
 } from 'react-native';  
-import { MyButton } from '../../components' 
+import { MyButton, FbButton } from '../../components' 
 import { ICFacebook, ICGoogle } from '../../../assets'       
 import React from 'react'
 
@@ -31,7 +31,7 @@ export default function LoginScreen({navigation}){
         throw Error('Password is required')
       }
 
-      navigation.navigate('Home')
+      navigation.replace("Home")
     }catch(err){
       Alert.alert('Error', err.message, [
         {text: 'OK', onPress: () => {
@@ -77,9 +77,8 @@ export default function LoginScreen({navigation}){
             placeholderTextColor='#c7c7c7'
             value={pasword}/>
 
-          <Button
+          <FbButton
             onPress={onSubmitLogin}
-            color='#000113'
             title="Login"/>
 
             
