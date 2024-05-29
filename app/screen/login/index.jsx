@@ -8,7 +8,8 @@ import {
   Dimensions,
   Image,
   ScrollView,
-  Alert
+  Alert,
+  TouchableOpacity
 } from 'react-native';  
 import { MyButton, FbButton } from '../../components' 
 import { ICFacebook, ICGoogle } from '../../../assets'       
@@ -39,7 +40,11 @@ export default function LoginScreen({navigation}){
         }},
       ]);
     }
+  }
 
+
+  const onRegister=()=>{
+    navigation.navigate("RegisterName")
   }
 
   return (
@@ -101,7 +106,9 @@ export default function LoginScreen({navigation}){
 
         <View style={style.containerBottom}>
           <Text>Don't have account? </Text>
-          <Text style={{fontWeight:'bold'}}>Create now</Text>
+          <TouchableOpacity onPress={onRegister}>
+            <Text style={{fontWeight:'bold'}}>Create now</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
