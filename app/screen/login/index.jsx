@@ -17,7 +17,6 @@ import ApiLib from "../../lib/ApiLib"
 
 const windowWidth = Dimensions.get('window').width;
 
-
 export default function LoginScreen({navigation}){
   const [email, onChangeEmail] = React.useState('')
   const [pasword, onChangePassword] = React.useState('')
