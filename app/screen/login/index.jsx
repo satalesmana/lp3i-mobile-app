@@ -8,8 +8,7 @@ import {
   Image,
   ScrollView,
   Alert,
-  TouchableOpacity,
-  ActivityIndicator
+  TouchableOpacity
 } from 'react-native';  
 import { MyButton, FbButton } from '../../components' 
 import { ICFacebook, ICGoogle } from '../../../assets'       
@@ -71,14 +70,6 @@ export default function LoginScreen({navigation}){
     navigation.navigate("RegisterName")
   }
 
-  if (loading) {
-    return (
-      <View style={{ flex:1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    )
-  }
-  
   return (
     <ScrollView>
       <View>
@@ -115,6 +106,7 @@ export default function LoginScreen({navigation}){
             value={pasword}/>
 
           <FbButton
+            loading={loading}
             onPress={onSubmitLogin}
             title="Login"/>
 
